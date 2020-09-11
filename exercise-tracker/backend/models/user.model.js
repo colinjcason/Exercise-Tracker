@@ -5,10 +5,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: {
         type: String,
-        // unique: true,
+        unique: true,
         trim: true,
-        minlength: 3,
-        sparse: true
+        minlength: 3
     }
 }, {
     timestamps: true
