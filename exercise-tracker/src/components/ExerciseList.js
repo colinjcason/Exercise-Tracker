@@ -2,7 +2,7 @@ import { Divider } from '@material-ui/core';
 import React from 'react';
 
 const ExerciseList = () => (
-    <div>Exercise List Component</div>
+    <h1>Exercise List Component</h1>
 )
 
 export default ExerciseList;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CreateExercise = () => (
-    <div>Create Component</div>
+    <h1>Create Component</h1>
 )
 
 export default CreateExercise;
