@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { AppBar, Toolbar, Tabs, Tab, Divider} from '@material-ui/core';
+import { AppBar, Tabs, Tab } from '@material-ui/core';
 
 function NavBar() {
 
