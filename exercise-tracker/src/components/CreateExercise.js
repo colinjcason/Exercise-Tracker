@@ -41,7 +41,7 @@ function CreateExercise() {
         setUsers(['test user'])
     }
 
-     const onChangeUsername = (e) => {
+    const onChangeUsername = (e) => {
         setUsername(e.target.value)
     };
 
