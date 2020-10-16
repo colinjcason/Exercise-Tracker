@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,13 +37,19 @@ function CreateExercise() {
     const [date, setDate] = useState(new Date());
     const [users, setUsers] = useState([]);
 
-    const componentDidMount = () => {
-        setUsername('test user');
-        setUsers(['test user'])
-    }
+    useEffect(() => {
+        axios.get('http://localhost:5000/users/')
+        .then(res => {
+            if(res.data.length > 0) {
+                setUsers(res.data.map(user => user.username))
+                setUsername(res.data[0].username);
+            }
+        })
+    });
 
     const onChangeUsername = (e) => {
         setUsername(e.target.value)
+        console.log(username)
     };
 
     const onChangeDescription = (e) => {
@@ -53,7 +60,7 @@ function CreateExercise() {
         setDuration(e.target.value)
     };
 
-    const onChangeDate = () => {
+    const onChangeDate = (date) => {
         setDate(date)
     };
 
@@ -69,7 +76,10 @@ function CreateExercise() {
 
         console.log(exercise);
 
-        window.location = '/';
+        axios.post('http://localhost:5000/exercises/add', exercise)
+        .then(res => console.log(res.data));
+
+        // window.location = '/';
     };
 
     return (
@@ -79,17 +89,15 @@ function CreateExercise() {
                 <Grid item xs={12} className={classes.paper}>
                     <FormControl required margin='normal'>
                         <InputLabel>User</InputLabel>
-                        <Select labelId='user' id='user' value={username} onChange={onChangeUsername} >
-                            <MenuItem value={'test user'} >test user</MenuItem> 
-                            <MenuItem value={'test user'} >test user</MenuItem>
-                            <MenuItem value={'test user'} >test user</MenuItem>
+                        <Select labelId='user' id='user' value='' onChange={onChangeUsername} >
+                            {users.map(user => <MenuItem value={user}>{user}</MenuItem>)}                        
                         </Select>
                         <Grid item xs={12} className={classes.paper}></Grid>
                         <TextField className={classes.paper} required label='Description' onChange={onChangeDescription} />
                         <Grid item xs={12} className={classes.paper}></Grid>
                         <DatePicker className={classes.date} selected={date} onChange={onChangeDate} />
                         <Grid item xs={12} className={classes.paper}></Grid>
-                        <TextField className={classes.paper} required label='Duration' onChange={onChangeDuration} />
+                        <TextField className={classes.paper} required label='Duration (in minutes)' onChange={onChangeDuration} />
                         <Grid item xs={12} className={classes.paper}></Grid>
                         <Button className={classes.paper} variant='contained' color='primary' onClick={onSubmit}>Create Exercise</Button>
                     </FormControl>

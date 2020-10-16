@@ -11,6 +11,7 @@ function App() {
     <Router>
       <NavBar />
       <br />
+      <br />
         <Switch>
           <Route exact path='/' component={ExerciseList} />
           <Route path='/edit/:id' component={EditExercise} />

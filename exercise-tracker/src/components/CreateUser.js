@@ -53,7 +53,7 @@ function CreateUser() {
             <Grid container className={classes.root}>
                 <Grid item xs={12} className={classes.paper}>
                     <FormControl required margin='normal'>
-                        <TextField className={classes.paper} required label='Username' onChange={onChangeUsername} />
+                        <TextField className={classes.paper} required label='Username' onChange={onChangeUsername} value={username} />
                         <Grid item xs={12} className={classes.paper}></Grid>
                         <Button className={classes.paper} variant='contained' color='primary' onClick={onSubmit}>Create User</Button>
                     </FormControl>
